@@ -10,7 +10,7 @@ const renderTable = (data) => {
     data?.map((item, index) => {
       return `
       <tr class="odd gradeX">
-      <td>${index || ''}</td>
+      <td>${index + 1 || ''}</td>
       <td>${item?.First_Name || ''} ${item?.Last_Name || ''}</td>
       <td>${item?.Department || ''}</td>
       <td>${item?.Gender ? 'Nam' : 'Nữ' || ''}</td>
@@ -25,6 +25,7 @@ const renderTable = (data) => {
     });
   return html?.join('');
 };
+
 const main = async () => {
   await getDataEmployee();
   document.getElementById('newUser').innerHTML = `${dataArr.length}`;
