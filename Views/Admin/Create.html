@@ -274,17 +274,34 @@
                             placeholder="Enter Pay_Rate..."
                           />
                         </div>
-                        <div class="form-group">
-                          <label for="PayRates_id">PayRates_id</label>
-                          <input
-                            type="text"
-                            style="width: 85%"
-                            class="form-control"
-                            id="PayRates_id"
-                            name="PayRates_id"
-                            placeholder="Enter PayRates_id..."
-                          />
+
+                        <div class="form-group PayRates_id">
+                          <script>
+                            const dataPayRate = [];
+                            const getDataPayRate = async () => {
+                              const res = await fetch(
+                                'http://localhost:3001/pay-rate'
+                              );
+                              const data = await res.json();
+                              document.querySelector(
+                                '.PayRates_id'
+                              ).innerHTML = `
+                              <label for="PayRates_id">PayRates_id</label>
+                            <select name="PayRates_id">
+                              <option value="">PayRates_id</option>
+                              ${data?.data?.map((item) => {
+                                console.log(item);
+                                return `
+                                <option value="${item.idPay_Rates}">${item.Pay_Rate_Name}</option>
+                              `;
+                              })}
+                            </select>
+                            `;
+                            };
+                            getDataPayRate();
+                          </script>
                         </div>
+
                         <div class="form-group">
                           <label for="Vacation_Days">Vacation_Days</label>
                           <input
