@@ -246,6 +246,31 @@
                             getDataEthnicity();
                           </script>
                         </div>
+                        <div class="form-group Benefit_Plans">
+                          <script>
+                            const dataBenefit_Plans = [];
+                            const getDataBenefit_Plans = async () => {
+                              const res = await fetch(
+                                'http://localhost:3001/benefit'
+                              );
+                              const data = await res.json();
+                              document.querySelector(
+                                '.Benefit_Plans'
+                              ).innerHTML = `
+                              <label for="Benefit_Plans">Benefit_Plans</label>
+                            <select name="Benefit_Plans">
+                              <option value="">Benefit_Plans</option>
+                              ${data?.data?.map((item) => {
+                                return `
+                                <option value="${item?.Benefit_Plan_ID}">${item?.Benefit_Plan_ID}</option>
+                              `;
+                              })}
+                            </select>
+                            `;
+                            };
+                            getDataBenefit_Plans();
+                          </script>
+                        </div>
                         <!--  -->
                         <div class="form-group Deductable">
                           <script>
