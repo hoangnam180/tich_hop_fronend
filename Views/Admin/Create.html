@@ -206,36 +206,71 @@
 
                         <div class="form-group">
                           <label for="Gender">Gender</label>
-                          <input
-                            type="text"
-                            style="width: 85%"
-                            class="form-control"
-                            id="Gender"
-                            name="Gender"
-                            placeholder="Enter Gender..."
-                          />
+                          <select name="Gender" id="Gender">
+                            <option value="1">Nam</option>
+                            <option value="0">Nữ</option>
+                          </select>
                         </div>
                         <div class="form-group">
-                          <label for="Ethnicity">Ethnicity</label>
-                          <input
-                            type="text"
-                            style="width: 85%"
-                            class="form-control"
-                            id="Ethnicity"
-                            name="Ethnicity"
-                            placeholder="Enter Ethnicity..."
-                          />
+                          <label for="Shareholder_Status"
+                            >Shareholder_Status</label
+                          >
+                          <select
+                            name="Shareholder_Status"
+                            id="Shareholder_Status"
+                          >
+                            <option value="1">true</option>
+                            <option value="0">false</option>
+                          </select>
                         </div>
-                        <div class="form-group">
-                          <label for="Deductable">Deductable</label>
-                          <input
-                            type="text"
-                            style="width: 85%"
-                            class="form-control"
-                            id="Deductable"
-                            name="Deductable"
-                            placeholder="Enter Deductable..."
-                          />
+                        <div class="form-group Ethnicity">
+                          <script>
+                            const dataEthnicity = [];
+                            const getDataEthnicity = async () => {
+                              const res = await fetch(
+                                'http://localhost:3001/ethnicity'
+                              );
+                              const data = await res.json();
+                              document.querySelector('.Ethnicity').innerHTML = `
+                              <label for="Ethnicity">Ethnicity</label>
+                            <select name="Ethnicity">
+                              <option value="">Ethnicity</option>
+                              ${data?.data?.map((item) => {
+                                return `
+                                <option value="${item?.Ethnicity}">${item?.Ethnicity}</option>
+                              `;
+                              })}
+                            </select>
+                            `;
+                            };
+                            getDataEthnicity();
+                          </script>
+                        </div>
+                        <!--  -->
+                        <div class="form-group Deductable">
+                          <script>
+                            const dataDeductable = [];
+                            const getDataDeductable = async () => {
+                              const res = await fetch(
+                                'http://localhost:3001/deductable'
+                              );
+                              const data = await res.json();
+                              document.querySelector(
+                                '.Deductable'
+                              ).innerHTML = `
+                              <label for="Deductable">Deductable</label>
+                            <select name="Deductable">
+                              <option value="">Deductable</option>
+                              ${data?.data?.map((item) => {
+                                return `
+                                <option value="${item?.Deductable}">${item?.Deductable}</option>
+                              `;
+                              })}
+                            </select>
+                            `;
+                            };
+                            getDataDeductable();
+                          </script>
                         </div>
                       </div>
                       <div class="col-6" style="width: 50%">
@@ -250,17 +285,6 @@
                             id="Employment_Status"
                             name="Employment_Status"
                             placeholder="Enter Employment_Status..."
-                          />
-                        </div>
-                        <div class="form-group">
-                          <label for="SSN">SSN</label>
-                          <input
-                            type="text"
-                            style="width: 85%"
-                            class="form-control"
-                            id="SSN"
-                            name="SSN"
-                            placeholder="Enter SSN..."
                           />
                         </div>
                         <div class="form-group">
@@ -290,7 +314,6 @@
                             <select name="PayRates_id">
                               <option value="">PayRates_id</option>
                               ${data?.data?.map((item) => {
-                                console.log(item);
                                 return `
                                 <option value="${item.idPay_Rates}">${item.Pay_Rate_Name}</option>
                               `;

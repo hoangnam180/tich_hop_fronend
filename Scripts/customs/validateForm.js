@@ -47,11 +47,6 @@ var validator = new FormValidator(
       rules: 'required',
     },
     {
-      name: 'SSN',
-      display: 'Please Type SSN',
-      rules: 'required',
-    },
-    {
       name: 'Pay_Rate',
       display: 'Please Type Pay_Rate',
       rules: 'required',
