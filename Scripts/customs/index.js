@@ -1,9 +1,11 @@
+let isUpdate;
 let dataArr = [];
 const getDataEmployee = async () => {
   const res = await fetch('http://localhost:3001/total-earning');
   const data = await res.json();
   dataArr = data?.data;
 };
+
 const renderTable = (data) => {
   const html =
     data?.length > 0 &&
@@ -22,7 +24,7 @@ const renderTable = (data) => {
       <td>${item?.Paid_To_Date || ''}</td>
       <td>${item?.Paid_Last_Year || ''}</td>
       <td>
-        <a  
+      <a href="/Views/Admin/Update.html"
          onclick="editEmployee(${item?.Employee_ID})"
         class="btn btn-primary btn-sm">Edit</a>
         <a
@@ -34,6 +36,14 @@ const renderTable = (data) => {
     });
   return html?.join('');
 };
+
+const editEmployee = (id) => {
+  isUpdate = true;
+  const data = dataArr?.find((item) => item?.Employee_ID === id);
+  console.log(data);
+  localStorage.setItem('data', JSON.stringify(data));
+};
+
 const deleteEmployee = async (id) => {
   const res = await fetch(`http://localhost:3001/total-earning/${id}`, {
     method: 'DELETE',
